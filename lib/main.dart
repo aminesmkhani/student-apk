@@ -15,7 +15,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        inputDecorationTheme: InputDecorationTheme(border: OutlineInputBorder()),
+        inputDecorationTheme:
+            InputDecorationTheme(border: OutlineInputBorder()),
         colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
             .copyWith(secondary: Color(0xff16E5A7)),
         useMaterial3: true,
@@ -66,42 +67,49 @@ class HomeScreen extends StatelessWidget {
 }
 
 class _AddStudentForm extends StatelessWidget {
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _courseController = TextEditingController();
+  final TextEditingController _scoreController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton.extended(onPressed: (){
-
-      }, label: Row(
-        children: [
-          Icon(Icons.check),
-          Text('Save')
-        ],
-      )),
-      appBar: AppBar(title: Text('Add New Student'),),
+      floatingActionButton: FloatingActionButton.extended(
+          onPressed: () {},
+          label: Row(
+            children: [Icon(Icons.check), Text('Save')],
+          )),
+      appBar: AppBar(
+        title: Text('Add New Student'),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             TextField(
-              decoration: InputDecoration(
-                label: Text('First Name')
-              ),
+              controller: _firstNameController,
+              decoration: InputDecoration(label: Text('First Name')),
             ),
-            SizedBox(height: 8,),
-            TextField(
-              decoration: InputDecoration(
-                label: Text('Lasr Name')
-              ),
+            SizedBox(
+              height: 8,
             ),
-            SizedBox(height: 8,),
             TextField(
-              decoration: InputDecoration(
-                label: Text('Course')
-              ),
+              controller: _lastNameController,
+              decoration: InputDecoration(label: Text('Lasr Name')),
             ),
-            SizedBox(height: 8,),
+            SizedBox(
+              height: 8,
+            ),
             TextField(
+              controller: _courseController,
+              decoration: InputDecoration(label: Text('Course')),
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            TextField(
+              controller: _scoreController,
               decoration: InputDecoration(label: Text('Score')),
             ),
           ],
