@@ -30,7 +30,9 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue).copyWith(
+          secondary: Color(0xff16E5A7)
+        ),
         useMaterial3: true,
       ),
       home: const HomeScreen(),
@@ -45,8 +47,17 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Android Expert'),
+        title: const Text('Android Expert'),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton.extended(onPressed: (){
+
+      },label: Row(
+        children: [
+          Icon(Icons.add),
+          Text('Add Student')
+        ],
+      )),
       body: FutureBuilder<List<StudentData>>(
         future: getStudents(),
         builder: (context, snapshot) {
