@@ -34,7 +34,7 @@ class HttpClient {
 }
 
 Future<List<StudentData>> getStudents() async {
-  final response =await HttpClient.dio.get('experts/student');
+  final response = await HttpClient.dio.get('experts/student');
   final List<StudentData> students = [];
   if (response.data is List<dynamic>) {
     (response.data as List<dynamic>).forEach((element) {
@@ -42,4 +42,19 @@ Future<List<StudentData>> getStudents() async {
     });
   }
   return students;
+}
+
+Future<StudentData> saveStudent(
+    String firstName, String lastName, String course, String score) async {
+  final response = await HttpClient.dio.post('experts/student', data: {
+    "first_name": firstName,
+    "last_name": lastName,
+    "course": course,
+    "score": score
+  });
+  if (response.statusCode == 200) {
+    return StudentData.fromJson(response.data);
+  } else {
+    throw Exception();
+  }
 }
