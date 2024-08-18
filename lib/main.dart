@@ -15,21 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
+        inputDecorationTheme: InputDecorationTheme(border: OutlineInputBorder()),
         colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
             .copyWith(secondary: Color(0xff16E5A7)),
         useMaterial3: true,
@@ -82,8 +68,45 @@ class HomeScreen extends StatelessWidget {
 class _AddStudentForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.red,
+    return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton.extended(onPressed: (){
+
+      }, label: Row(
+        children: [
+          Icon(Icons.check),
+          Text('Save')
+        ],
+      )),
+      appBar: AppBar(title: Text('Add New Student'),),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            TextField(
+              decoration: InputDecoration(
+                label: Text('First Name')
+              ),
+            ),
+            SizedBox(height: 8,),
+            TextField(
+              decoration: InputDecoration(
+                label: Text('Lasr Name')
+              ),
+            ),
+            SizedBox(height: 8,),
+            TextField(
+              decoration: InputDecoration(
+                label: Text('Course')
+              ),
+            ),
+            SizedBox(height: 8,),
+            TextField(
+              decoration: InputDecoration(label: Text('Score')),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
