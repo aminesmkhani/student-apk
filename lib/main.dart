@@ -26,9 +26,14 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,9 +42,12 @@ class HomeScreen extends StatelessWidget {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {
-            Navigator.of(context).push(
+          onPressed: () async {
+            final result = await Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => _AddStudentForm()));
+                setState(() {
+                  
+                });
           },
           label: Row(
             children: [Icon(Icons.add), Text('Add Student')],
@@ -49,6 +57,7 @@ class HomeScreen extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData && snapshot.data != null) {
             return ListView.builder(
+                padding: EdgeInsets.only(bottom: 84),
                 itemCount: snapshot.data!.length,
                 itemBuilder: (context, index) {
                   return _Student(
@@ -76,13 +85,14 @@ class _AddStudentForm extends StatelessWidget {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {
+          onPressed: () async {
             try {
-               saveStudent(
-                _firstNameController.text,
-                _lastNameController.text,
-                _courseController.text,
-                _scoreController.text);
+              final newstudentData = await saveStudent(
+                  _firstNameController.text,
+                  _lastNameController.text,
+                  _courseController.text,
+                  _scoreController.text);
+              Navigator.pop(context, newstudentData);
             } catch (e) {
               debugPrint(e.toString());
             }
