@@ -54,10 +54,8 @@ class HomeScreen extends StatelessWidget {
             return ListView.builder(
                 itemCount: snapshot.data!.length,
                 itemBuilder: (context, index) {
-                  return Container(
-                    height: 84,
-                    color: Colors.red,
-                    margin: EdgeInsets.fromLTRB(8, 4, 8, 0),
+                  return _Student(
+                    data: snapshot.data![index],
                   );
                 });
           } else {
@@ -66,6 +64,74 @@ class HomeScreen extends StatelessWidget {
             );
           }
         },
+      ),
+    );
+  }
+}
+
+class _Student extends StatelessWidget {
+  final StudentData data;
+
+  const _Student({super.key, required this.data});
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 84,
+      padding: EdgeInsets.all(8),
+      margin: EdgeInsets.fromLTRB(8, 4, 8, 4),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8),
+          boxShadow: [
+            BoxShadow(blurRadius: 10, color: Colors.black.withOpacity(0.05)),
+          ]),
+      child: Row(
+        children: [
+          Container(
+            width: 64,
+            height: 64,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                color: Theme.of(context).colorScheme.primary.withOpacity(0.1)),
+            child: Text(
+              data.finrstName.characters.first,
+              style: TextStyle(
+                  color: Theme.of(context).colorScheme.primary,
+                  fontWeight: FontWeight.w900,
+                  fontSize: 24),
+            ),
+          ),
+          SizedBox(
+            width: 8,
+          ),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(data.finrstName + ' ' + data.lastName),
+                SizedBox(height: 8,),
+                Container(
+                  padding: EdgeInsets.fromLTRB(4, 2, 4, 2),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(2),
+                      color: Colors.grey.shade200),
+                  child: Text(data.course,style: TextStyle(fontSize: 10),),
+                ),
+              ],
+            ),
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.bar_chart,color: Colors.grey.shade400,),
+              Text(data.score.toString(),style: TextStyle(
+                fontWeight: FontWeight.bold
+              ),)
+            ],
+          ),
+        ],
       ),
     );
   }
