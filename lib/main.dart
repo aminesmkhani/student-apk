@@ -30,9 +30,8 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue).copyWith(
-          secondary: Color(0xff16E5A7)
-        ),
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
+            .copyWith(secondary: Color(0xff16E5A7)),
         useMaterial3: true,
       ),
       home: const HomeScreen(),
@@ -50,14 +49,14 @@ class HomeScreen extends StatelessWidget {
         title: const Text('Android Expert'),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton.extended(onPressed: (){
-
-      },label: Row(
-        children: [
-          Icon(Icons.add),
-          Text('Add Student')
-        ],
-      )),
+      floatingActionButton: FloatingActionButton.extended(
+          onPressed: () {
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => _AddStudentForm()));
+          },
+          label: Row(
+            children: [Icon(Icons.add), Text('Add Student')],
+          )),
       body: FutureBuilder<List<StudentData>>(
         future: getStudents(),
         builder: (context, snapshot) {
@@ -76,6 +75,15 @@ class HomeScreen extends StatelessWidget {
           }
         },
       ),
+    );
+  }
+}
+
+class _AddStudentForm extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.red,
     );
   }
 }
@@ -122,13 +130,18 @@ class _Student extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(data.finrstName + ' ' + data.lastName),
-                SizedBox(height: 8,),
+                SizedBox(
+                  height: 8,
+                ),
                 Container(
                   padding: EdgeInsets.fromLTRB(4, 2, 4, 2),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(2),
                       color: Colors.grey.shade200),
-                  child: Text(data.course,style: TextStyle(fontSize: 10),),
+                  child: Text(
+                    data.course,
+                    style: TextStyle(fontSize: 10),
+                  ),
                 ),
               ],
             ),
@@ -136,10 +149,14 @@ class _Student extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.bar_chart,color: Colors.grey.shade400,),
-              Text(data.score.toString(),style: TextStyle(
-                fontWeight: FontWeight.bold
-              ),)
+              Icon(
+                Icons.bar_chart,
+                color: Colors.grey.shade400,
+              ),
+              Text(
+                data.score.toString(),
+                style: TextStyle(fontWeight: FontWeight.bold),
+              )
             ],
           ),
         ],
