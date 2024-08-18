@@ -54,7 +54,7 @@ Future<StudentData> saveStudent(
   });
   if (response.statusCode == 200) {
     return StudentData.fromJson(response.data);
-  } else {
+  }else{
     throw Exception();
   }
 }

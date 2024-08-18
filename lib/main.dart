@@ -76,7 +76,17 @@ class _AddStudentForm extends StatelessWidget {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {},
+          onPressed: () {
+            try {
+               saveStudent(
+                _firstNameController.text,
+                _lastNameController.text,
+                _courseController.text,
+                _scoreController.text);
+            } catch (e) {
+              debugPrint(e.toString());
+            }
+          },
           label: Row(
             children: [Icon(Icons.check), Text('Save')],
           )),
@@ -110,6 +120,7 @@ class _AddStudentForm extends StatelessWidget {
             ),
             TextField(
               controller: _scoreController,
+              keyboardType: TextInputType.number,
               decoration: InputDecoration(label: Text('Score')),
             ),
           ],
